@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="bg-gray-100" style="height: 100%;">
+    <div class="container mx-auto py-8">
+        <div class="grid row-span-2 col-span-3 sm:grid-cols-12 gap-6 px-4">
+            <div class="col-span-4 sm:col-span-3">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-32 h-32 rounded-full mb-4 shrink-0"">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                          </svg>
+                        <h1 class="text-xl font-bold">{{ username }}</h1>
+
+                        <br>
+                        <hr class="my-6 border-t border-gray-300">
+
+                        <h2 class="text-gray-800 text-center text-2xl font-bold">Add Fish</h2>
+                        <form class="mt-8 space-y-4" action="/addNewFish" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="username" value="{{username}}">
+                            <div>
+                                <label class="text-gray-800 text-sm mb-2 block">Fish</label>
+                                <div class="relative flex items-center">
+                                    <input name="fish" type="text" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter fish" />
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-gray-800 text-sm mb-2 block">Size in cm</label>
+                                <div class="relative flex items-center">
+                                    <input name="size" type="number" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter size" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-gray-800 text-sm mb-2 block">Weight in g</label>
+                                <div class="relative flex items-center">
+                                    <input name="weight" type="number" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter weight" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-gray-800 text-sm mb-2 block">Picture</label>
+                                <div class="relative flex items-center">
+                                    <input name="image" type="file" class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"/>
+                                </div>
+                            </div>
+
+                            <div class="!mt-8">
+                                <button type="submit" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                                    Add Fish
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4 sm:col-span-9">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-xl font-bold mb-4">Catch statistics</h2>
+                    <div class="relative overflow-x-auto">
+                        <table id="fishTable" class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400 text-center">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Id
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Fish
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Size
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Weight
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Picture
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Added
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fish in fishList %}
+                                <tr id="{{fish[0]}}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{fish[0]}}
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ fish[1]|safe }}
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ fish[2] }} cm
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ fish[3] }} g
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex justify-center items-center">
+                                        <image style="max-width: 80px; max-height: 80px;" src="{{ url_for('static', filename='images/' + fish[4]) }}">
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ fish[7] }}
+                                    </td>
+                                    <td scope="row">
+                                        <button style="background-color: blue; width: 60px;" type="button" data-row-id="{{fish[0]}}" class="edit focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">EDIT</button>
+                                        <button style="background-color: red; width: 60px;" type="button" data-row-id="{{fish[0]}}" class="delete focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">DELETE</button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const deleteButtons = document.querySelectorAll('.delete');
+    // Add event listener to each button
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const rowId = this.getAttribute('data-row-id');
+            const apiUrl = `/fish/${rowId}`;
+
+            fetch(apiUrl, {
+                method: 'DELETE', // DELETE method to match your Flask route
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // Parse JSON response
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.msg); // Handle error message
+                    });
+                }
+            })
+            .then(data => {
+                console.log(data.msg); // Success message
+                // Redirect to profile page after successful deletion
+                window.location.href = "/profile"; // Perform redirect on the client side
+            })
+            .catch(error => {
+                console.error('Error making DELETE request:', error);
+            });
+        });
+    });
+
+    const editButtons = document.querySelectorAll('.edit');
+    // Add event listener to each button
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const rowId = this.getAttribute('data-row-id');
+            const apiUrl = `/editFish/${rowId}`;
+
+            // Weiterleitung zur neuen Seite
+            window.location.href = apiUrl;
+        });
+    });
+</script>
+{% endblock %}

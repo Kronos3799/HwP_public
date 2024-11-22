@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-2xl font-bold" style="padding-bottom: 32px;">News</h1>
+    <form action="/home" method="post">
+        <input type="text" name="filter" id="filter" placeholder="Filter">
+    </form>
+    <div class="grid grid-cols-4 gap-4">
+        {% for fish in fishList %}
+        <div id="{{ fish[0] }}" class="grid fishCard" style="cursor: pointer">
+            <div class="">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <div class="flex flex-col items-center">
+                        <img src="{{ url_for('static', filename='images/' + fish[4]) }}" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
+                        </img>
+                        <h1 class="text-gray-700 text-xl font-bold">{{ fish[1]|safe }}</h1>
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400 text-center">
+                            <thead>
+                                <th></th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Size:</td>
+                                    <td>{{ fish[2]|safe }} cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight:</td>
+                                    <td>{{ fish[3]|safe }} g</td>
+                                </tr>
+                                <tr>
+                                    <td>User:</td>
+                                    <td>{{ fish[5]|safe }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Added:</td>
+                                    <td>{{ fish[7]|safe }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    const fishCard = document.querySelectorAll('.fishCard');
+    // Add event listener to each button
+    fishCard.forEach(card => {
+        card.addEventListener('click', function() {
+            const fishId = this.getAttribute('id');
+            const url = `/showFish/${fishId}`;
+            window.location.href = url;
+        });
+    });
+</script>
+{% endblock %}

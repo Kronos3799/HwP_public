@@ -1,2 +1,1 @@
-# HwP_public
-Hacking with Python 
+# WPM_Hacking-with-Python

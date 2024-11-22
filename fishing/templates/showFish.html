@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+Fish
+{% endblock %}
+
+{% block content %}
+
+<div class="bg-gray-100" style="height: 100%;">
+    <div class="container mx-auto py-8">
+        <div class="grid row-span-2 col-span-3 sm:grid-cols-12 gap-6 px-4">
+            <div class="col-span-4 sm:col-span-3">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-32 h-32 rounded-full mb-4 shrink-0"">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                          </svg>
+                        <h1 class="text-xl font-bold">{{fish[5]|safe}}</h1>
+
+                        <br>
+
+                        <hr class="my-6 border-t border-gray-300">
+
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400 text-center">
+                            <thead>
+                                <th></th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Size:</td>
+                                    <td>{{ fish[2] }} cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight:</td>
+                                    <td>{{ fish[3] }} g</td>
+                                </tr>
+                                <tr>
+                                    <td>Added:</td>
+                                    <td>{{ fish[7] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4 sm:col-span-9">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-xl font-bold mb-4">{{ fish[1]|safe }}</h2>
+                    <div class="flex relative overflow-x-auto" style="justify-content: center;">
+                        <image src="{{ url_for('static', filename='images/' + fish[4]) }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

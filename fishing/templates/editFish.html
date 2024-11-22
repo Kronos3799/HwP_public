@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit Fish
+{% endblock %}
+
+{% block content %}
+
+<div class="bg-gray-50 font-[sans-serif]">
+    <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+        <div class="max-w-md w-full">
+            <div class="flex flex-shrink-0 items-center">
+                <img class='w-40 mb-8 mx-auto block' src="https://cdn-icons-png.freepik.com/512/1830/1830776.png?ga=GA1.1.1931328337.1712667752" alt="Fishing stats">
+            </div>
+            <div class="p-8 rounded-2xl bg-white shadow">
+                <h2 class="text-gray-800 text-center text-2xl font-bold">Edit Fish</h2>
+                <form class="mt-8 space-y-4" action="/updateFish" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{{fish.id}}">
+                    <div>
+                    <label class="text-gray-800 text-sm mb-2 block">Fish</label>
+                    <div class="relative flex items-center">
+                        <input name="fish" type="text" value="{{fish.fish}}" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Edit fish" />
+                    </div>
+                    </div>
+
+                    <div>
+                    <label class="text-gray-800 text-sm mb-2 block">Size in cm</label>
+                    <div class="relative flex items-center">
+                        <input name="size" type="text" value="{{fish.size}}" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Edit size" />
+                    </div>
+                    </div>
+
+                    <div>
+                        <label class="text-gray-800 text-sm mb-2 block">Weight in g</label>
+                        <div class="relative flex items-center">
+                        <input name="weight" type="text" value="{{fish.weight}}" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Edit weight" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-gray-800 text-sm mb-2 block">Picture</label>
+                        <div class="relative flex items-center">
+                        <input name="picture" type="file" value="{{fish.picture}}" class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Edit picture" />
+                        </div>
+                    </div>
+
+                    <div class="!mt-8">
+                        <button type="submit" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
