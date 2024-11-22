@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <!-- main content -->
+        <main class="row my-5">
+            <div class="container g-0">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                    <!-- article preview -->
+                    {% for article in articles %}
+                    <article class="col">
+                        <div class="p-3 position-relative d-flex flex-column rounded-4 _shadow _bg-whitesmoke _article-preview">
+                            <h2>{{ article.title }}</h2>
+                            <hr class="my-2 _hline">
+                            <div class="text-start overflow-hidden" style="height: 24em;">
+                                {{ article.content | safe }}
+                            </div>
+                            <hr class="mt-0 mb-2 _hline">
+                            <a href="/article?id={{ article.id }}" class="stretched-link text-end text-dark fw-bold">continue reading</a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+{% endblock %}

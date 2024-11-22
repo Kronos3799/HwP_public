@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+{% endblock %}
+{% block content %}
+        <!-- main content -->
+        <main class="container vh-100">
+            <div class="row row-cols-1 justify-content-center align-items-center h-100">
+                <div class="col-lg-4">
+                    <div class="card border-0 rounded-4 _shadow _bg-whitesmoke">
+                        <div class="card-body">
+                            <!-- title with logo -->
+                            <a class="card-title d-flex align-items-center justify-content-center text-decoration-none text-reset" href="/">
+                                <img src="{{ url_for('static', filename='img/favicon.svg') }}" alt="" width="32" height="32" class="me-2">
+                                <h1 class="h3 mb-0 fw-bold">Hacking News</h1>
+                            </a>
+                            <br>
+                            <h3 class="card-title text-center mb-4">Register</h3>
+
+                            <!-- register form -->
+                            <form action="/register" method="POST">
+                                <!-- username -->
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+                                </div>
+                                <!-- email -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email address" required>
+                                </div>
+                                <!-- password -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                                </div>
+                                <!-- alert with notes -->
+                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                    By registering, you become an <b>author</b>. You will then have the opportunity to write your own articles.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                                <!-- submit -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </div>
+                            </form>
+                            
+                            <!-- login instead -->
+                            <div class="mt-2 text-center">
+                                <span>Already have an account? </span>
+                                <a href="login">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}

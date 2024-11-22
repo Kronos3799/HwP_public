@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Hacking News
+        </title>
+        <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap-icons/bootstrap-icons.css') }}">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+        {% block css %}
+        {% endblock %}
+    </head>
+    <body class="container">
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <!-- modal for flash messages -->
+                <div class="modal fade" id="flashModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Message</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="list-unstyled">
+                                    {% for category, message in messages %}
+                                        {% if category == 'success' %}
+                                        <li class="text-success">{{ message }}</li>
+                                        {% elif category == 'warning' %}
+                                        <li class="text-warning">{{ message }}</li>
+                                        {% elif category == 'error' %}
+                                        <li class="text-danger">{{ message }}</li>
+                                        {% else %}
+                                        <li class="text-primary">{{ message }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="modal-close" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% block navbar %}
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg mt-5 row rounded-4 _shadow _bg-whitesmoke">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="/">
+                    <img src="{{ url_for('static', filename='img/favicon.svg') }}" alt="" width="32" height="32" class="d-inline-block align-text-top">
+                    Hacking News
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                {% if login %}
+                <!-- navbar links (logged in) -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/authors">Authors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/article-editor">Article-Editor</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <button type="button" class="btn btn-outline-danger m-2" onclick="window.location.href='/logout'">Logout</button>
+                    </ul>
+                </div>
+                {% else %}
+                <!-- navbar links (not logged in) -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/authors">Authors</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <button type="button" class="btn btn-outline-primary m-2" onclick="window.location.href='/login'">Login</button>
+                        <button type="button" class="btn btn-outline-success m-2" onclick="window.location.href='/register'">Register</button>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        <!-- Bootstrap JS -->
+        <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+        <!-- jQuery -->
+        <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+
+        <!-- custom JavaScript -->
+        <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+        {% block js %}
+        {% endblock %}
+    </body>
+</html>

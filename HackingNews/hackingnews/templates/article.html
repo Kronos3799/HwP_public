@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- main content -->
+    <main class="row my-5">
+        <div class="container px-5 py-3 rounded-4 _shadow _bg-whitesmoke">
+            <header>
+                <h1 class="mb-4 text-center fw-bold text-decoration-underline">{{ article.title }}</h1>
+                <table>
+                    <tr>
+                        <td class="pe-3">Author:</td>
+                        <td>{{ article.author }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pe-3">Published:</td>
+                        <td>{{ article.publication_date }}</td>
+                    </tr>
+                </table>
+            </header>
+            <hr class="my-4 _hline">
+            <article>
+                {{ article.content | safe }}
+            </article>
+        </div>
+    </main>
+{% endblock %}
