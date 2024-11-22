@@ -1,6 +1,0 @@
-- erste Pürfungsaufgabe - mySQL Injektions
-    Mit Hilfe einer SQL Injektion sollen alle User und deren Passwörter ausgelesen und angezeigt (Liste) werden können.
-
-    Er hat hier im Beispiel '# verwendet.
-
-    Als Hinweis: er hat die Umsetzung mit flash gemacht.
