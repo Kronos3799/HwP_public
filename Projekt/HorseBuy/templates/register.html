@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Register @ HorseBuy
+{% endblock %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="row">
+            <div class="col-md-8 offset-md-3">
+                <h1>HorseBuy - </h1>
+
+                <br>
+
+                <h3>where you can buy everything for horses, <br> except a horse.</h3>
+
+                <br>
+                <br>
+
+                <h2>Register</h2>
+                <form method="POST" action="/register">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Firstname</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Lastname</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-Mail</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="address">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" href="/login">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+Aufbau meiner Datenbank:
+
+SHOW databases;
+
+USE horseBuy;
+
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    firstname VARCHAR(30) NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    address VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE item (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    price FLOAT NOT NULL,
+    info VARCHAR(128) NOT NULL,
+    user INT NOT NULL,
+    FOREIGN KEY (user) REFERENCES user (id) ON DELETE CASCADE
+);
+
+CREATE USER 'webuser'@'%' IDENTIFIED BY 'Heute0000';
+GRANT INSERT, SELECT, DELETE, DROP, UPDATE on horseBuy.* TO 'webuser'@'%';
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+OFFEN:
+
+- Coockie löschen beim löschen des Accounts
