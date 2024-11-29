@@ -31,5 +31,3 @@ GRANT INSERT, SELECT, DELETE, DROP, UPDATE on horseBuy.* TO 'webuser'@'%';
 
 
 OFFEN:
-
-- Coockie löschen beim löschen des Accounts
